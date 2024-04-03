@@ -1,0 +1,65 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% csrf_token %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">View Marks</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+
+          
+          
+          <th>Marks Obtained</th>
+          {% comment %} <th>Attempt</th> {% endcomment %}
+          <th>Date & Time of Submission</th>
+        </tr>
+      </thead>
+    {%if results%}
+      {% for t in results %}
+      <tr>
+
+        {% comment %} <td> {{t.}}</td> {% endcomment %}
+        <td> {{t.marks}}</td>
+        {% comment %} <td>Attemp {{ forloop.counter }}</td> {% endcomment %}
+        <td> {{t.date}}</td>
+        
+        
+      </tr>
+      {% endfor %}
+    {% else %}
+        <!-- If courses is empty or None -->
+        <tr>
+            <td colspan="3"><center><span style="color:red">Marks is not released by Teacher</span></center></td>
+        </tr>
+    {% endif %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

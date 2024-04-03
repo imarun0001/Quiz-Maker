@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+{% load static %} 
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <style>
+        form {
+            margin: 50px; 
+        }
+    </style>
+    <!-- Bootstrap CSS (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="...">
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+    <script src="onlinequiz13nov/onlinequiz/static/js/message.js" defer></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .toggle-password {
+            float: right;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: -25px;
+        }
+    </style>
+    <!-- Add jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".toggle-password").click(function () {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                input = $(this).parent().find("input");
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    {% include "quiz/navbar.html" %}
+
+    <br><br><br>
+    <h3 style="text-align: center; color: red;">STUDENT SIGNUP</h3>
+    <form method="POST" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <div id="alert-{{ forloop.counter }}" class="alert 
+                    {% if message.tags == 'success' %}
+                        alert-success
+                    {% elif message.tags == 'info' %}
+                        alert-info
+                    {% elif message.tags == 'warning' %}
+                        alert-warning
+                    {% elif message.tags == 'error' %}
+                        alert-danger
+                    {% else %}
+                        alert-secondary {# Default to secondary if no match #}
+                    {% endif %}
+                ">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+                </div>
+                <script>
+                    // Automatically close the alert after 5000 milliseconds (5 seconds)
+                    $(document).ready(function() {
+                        var alertId = "#alert-{{ forloop.counter }}";
+                        setTimeout(function() {
+                            $(alertId).alert('close');
+                        }, 5000);
+                    });
+                </script>
+            {% endfor %}
+        {% endif %}
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="username">Username <span style="color:red";>*</span></label>
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control" 
+                    hx-post="{% url 'check_username' %}" hx-target="#username-check" hx-trigger="keyup">
+                <div id="username-check"></div> 
+            </div>
+            <div class="form-group col-md-6">
+                <p>
+                    <label for="inputPassword4">Password <span style="color:red";>*</span></label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="form-control" 
+                        hx-post="{% url 'check_password' %}" hx-target="#userpassword-check" hx-trigger="keyup">
+                    <i class="toggle-password fa fa-fw fa-eye-slash"></i>
+                    <div id="userpassword-check"></div>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name <span style="color:red";>*</span></label>
+                <input type="text" name="first_name" id="first_name" placeholder="First Name" class="form-control" required="true">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name <span style="color:red";>*</span></label>
+                <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control" required="true">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="country_code">Country Code <span style="color:red">*</span></label>
+                <select id="country_code" name="country_code" class="form-control form-select">
+                    <option value="+91">+91 - India</option>
+                    <option value="+880">+880 - Bangladesh</option>
+                    <option value="+977">+977 - Nepal</option>
+                    <option value="+94">+94 - Sri Lanka</option>
+                    <option value="+1">+1 - United States</option>
+                    <option value="+92">+92 - Pakistan</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="mobile">Mobile <span style="color:red">*</span></label>
+                <input type="text" name="mobile" id="mobile" placeholder="Mobile number" class="form-control" 
+                    hx-post="{% url 'check_mobile' %}" hx-target="#mobile_check" hx-trigger="keyup">
+                <div id="mobile_check"></div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="address">Email <span style="color:red">*</span></label>
+                <input type="email" name="address" id="address" placeholder="Email Address" class="form-control" 
+                    hx-post="{% url 'check_useremail' %}" hx-target="#useremail-check" hx-trigger="keyup">
+                <div id="useremail-check"></div>
+            </div>
+        </div>
+        <br>
+        <div style="display: flex;align-items: center; justify-content: center;">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </form>
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <!-- {% include "quiz/footer.html" %} -->
+</body>
+</html>
+

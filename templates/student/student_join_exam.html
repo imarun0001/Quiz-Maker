@@ -1,0 +1,69 @@
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  a:link {
+        text-decoration: none;
+      }
+    
+  </style>
+</head>
+<h2 style="text-align:center; color:blue;">COURSE ENROLLMENT</h2>
+<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div id="alert-{{ forloop.counter }}" class="alert 
+      {% if message.tags == 'success' %}
+        alert-success
+      {% elif message.tags == 'info' %}
+        alert-info
+      {% elif message.tags == 'warning' %}
+        alert-warning
+      {% elif message.tags == 'error' %}
+        alert-danger
+      {% else %}
+        alert-secondary {# Default to secondary if no match #}
+      {% endif %}
+    ">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+  <script>
+    // Automatically close the alert after 5000 milliseconds (5 seconds)
+    $(document).ready(function() {
+      var alertId = "#alert-{{ forloop.counter }}";
+      setTimeout(function() {
+        $(alertId).alert('close');
+      }, 5000);
+    });
+  </script>
+{% endfor %}
+{% endif %}
+
+
+
+    <div class="form-group">
+      <br><label for="student_id">Student User ID</label>
+      {% render_field courseenroll.student_id|attr:'required:true' class="form-control" %}<br><br>
+      <br><label for="course_code">Course Code</label>
+      {% render_field courseenroll.course_code|attr:'required:true' class="form-control" %}
+    </div>
+    
+
+    <br><br><button type="submit" class="btn btn-primary">JOIN</button>
+  </form>
+<br><br><br>
+{% endblock content %}

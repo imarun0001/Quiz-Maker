@@ -1,0 +1,13 @@
+
+{% autoescape off %}
+
+Welcome to QuizMaker
+Hello {{ name }}
+
+please confirm your email address by clicking the link.
+
+
+Confirmation Link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+
+{% endautoescape %}

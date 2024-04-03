@@ -1,0 +1,64 @@
+{% extends 'quiz/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+  <style media="screen">
+    input[type=text], select,input[type=number] ,input[type=password], textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+
+  </style>
+
+
+</head>
+
+<br><br>
+<h3 style="text-align:center;">UPDATE TEACHER</h3>
+<div>
+  <form method="post"  autocomplete="off" enctype="multipart/form-data" style="margin-left:200px;margin-right:200px;">
+      {% csrf_token %}
+        <label for="first_name">First Name</label>
+        {% render_field userForm.first_name|attr:'required:true' class="form-control" placeholder="First Name" %}
+        <br><label for="last_name">Last Name</label>
+        {% render_field userForm.last_name|attr:'required:true' class="form-control" placeholder="Last Name" %}
+        <br><label for="mobile">Mobile</label>
+        {% render_field teacherForm.mobile|attr:'required:true' class="form-control" placeholder="Mobile" %}
+        <br><label for="address">Email Address</label>
+        <br>{% render_field teacherForm.address|attr:'required:true' class="form-control" placeholder="Email Address" %}  
+        <br><br><label for="username">Username</label>
+        {% render_field userForm.username|attr:'required:true' class="form-control" placeholder="Username" %}
+        <br><label for="password">Password</label>
+        {% render_field userForm.password|attr:'required:true' class="form-control" placeholder="Password" %} <br><br>
+        {% comment %} <label for="profile_pic">Profile Picture</label> {% endcomment %}
+          {% comment %} {% render_field teacherForm.profile_pic class="form-control" placeholder="Profile Picture" %} {% endcomment %}
+<br><br>
+    <input type="submit" value="Update">
+  </form>
+</div>
+
+
+
+<br><br><br><br><br><br><br><br>
+{% endblock content %}

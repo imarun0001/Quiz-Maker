@@ -1,0 +1,127 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        a:link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<h2 style="text-align:center; color:blue;">ADD QUESTION</h2>
+<form method="POST" autocomplete="off" style="margin: 100px; margin-top: 0px;">
+    {% csrf_token %}
+    <div class="form-group">
+
+    {% comment %} ---valid--Start---- {% endcomment %}
+        {% if messages %}
+                {% for message in messages %}
+                <div id="alert-{{ forloop.counter }}" class="alert 
+                {% if message.tags == 'success' %}
+                    alert-success
+                {% elif message.tags == 'info' %}
+                    alert-info
+                {% elif message.tags == 'warning' %}
+                    alert-warning
+                {% elif message.tags == 'error' %}
+                    alert-danger
+                {% else %}
+                    alert-secondary {# Default to secondary if no match #}
+                {% endif %}
+                ">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            <script>
+                // Automatically close the alert after 5000 milliseconds (5 seconds)
+                $(document).ready(function() {
+                var alertId = "#alert-{{ forloop.counter }}";
+                setTimeout(function() {
+                    $(alertId).alert('close');
+                }, 5000);
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
+
+        {% comment %} ---valid--End---- {% endcomment %}
+        
+        <label for="teacher_id">Teacher UserID</label>
+        {% render_field testdetailsform.teacher_id|attr:'required:true' class="form-control"  %}
+        <br>
+        <label for="course_id">Course</label>
+        {% render_field testdetailsform.course_id|attr:'required:true' class="form-control" %}
+        <br>
+        <label for="question_number">Number of Questions</label>
+        {% render_field testdetailsform.question_number|attr:'required:true' class="form-control"  %}
+        <br>
+        <label for="total_marks">Total Marks</label>
+        {% render_field testdetailsform.total_marks|attr:'required:true' class="form-control"  %}
+        <br>
+        <label for="start_time">Opening Time</label>
+        {% comment %} {% render_field testdetailsform.start_time|attr:'required:true' class="form-control"  %} {% endcomment %}        
+        <input type="datetime-local" id="start_time" name="start_time" required class="form-control" data-toggle="datepicker" value="{{ testdetailsform.start_time.value|date:'Y-m-d\TH:i' }}">
+
+        <br>
+        <label for="end_time">Closing Time</label>
+        {% comment %} {% render_field testdetailsform.end_time|attr:'required:true' class="form-control"  %} {% endcomment %}
+        {% comment %} <input type="datetime-local" id="end_time" name="end_time" required class="form-control" data-toggle="datepicker"> {% endcomment %}
+        <input type="datetime-local" id="end_time" name="end_time" required class="form-control" data-toggle="datepicker" value="{{ testdetailsform.end_time.value|date:'Y-m-d\TH:i' }}">
+        
+        <br>
+    
+        {% for form in question_forms %}
+        <br>
+            <fieldset>
+                <legend>Question {{ form.prefix|add:1 }}</legend>  
+                {% comment %} <label for="course_id">Course id</label>
+                {% render_field form.course_id|attr:'required:true' class="form-control" placeholder="What is the currency of India ?" %}
+                <br>  {% endcomment %}
+                {% comment %} <label for="testno">Test id</label>
+                {% render_field form.testno|attr:'required:true' class="form-control"  %}
+                <br>   {% endcomment %}
+                
+                {% comment %}
+                <input type="hidden" name="testno" value="{{ testdetailsform.initial.testno }}">
+                <input type="hidden" name="course_id" value="{{ testdetailsform.initial.course_id }}">
+                {% endcomment %}
+
+                <label for="question">Question</label>
+                {% render_field form.question|attr:'required:true' class="form-control" placeholder="What is the currency of India ?" %}
+                <br>
+                <label for="marks">Marks</label>
+                {% render_field form.marks|attr:'required:true' class="form-control" placeholder="10" %}
+                <br>
+                <label for="option1">Option 1</label>
+                {% render_field form.option1|attr:'required:true' class="form-control" placeholder="Rupees" %}
+                <br>
+                <label for="option2">Option 2</label>
+                {% render_field form.option2|attr:'required:true' class="form-control" placeholder="Dollar" %}
+                <br>
+                <label for="option3">Option 3</label>
+                {% render_field form.option3|attr:'required:true' class="form-control" placeholder="Taka" %}
+                <br>
+                <label for="option4">Option 4</label>
+                {% render_field form.option4|attr:'required:true' class="form-control" placeholder="Euro" %}
+                <br>
+                <label for="answer">Answer</label>
+                {% render_field form.answer|attr:'required:true' class="form-control" %}
+            </fieldset>
+        {% endfor %}
+        <br><br><button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+</form>
+<script>
+      $(document).ready(function() {
+        $('#start_time').datepicker();
+        $('#end_time').datepicker();
+      });
+    </script>
+<br><br><br><br><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+<h3>Signup</h3>
+
+    {%for message in messages%}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" >
+    <strong>
+        Messages:
+    </strong> {{message}}
+    <button type="button" class="close" data-dismis="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>   
+    {% endfor %}
+
+
+
+    {% comment %} <form action="/signup" method='post'> {% endcomment %}
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <label for="">Username</label>
+        <input type="text" name="username" id="username" placeholder="Create user name (Only Latters and number)" required>
+        <br>
+        <label for="">Firstname</label>
+        <input type="text" name="firstname" id="firstname" placeholder="Enter Your First Name" required>
+        <br>
+        <label for="">Lastname</label>
+        <input type="text" name="lastname" id="lastname" placeholder="Enter Your Last Name" required>
+        <br>
+        <label for="">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter Your Email Address" required>
+        <br>
+        <label for="">Password</label>
+        <input type="password" name="password" id="password" placeholder="Create a password" required>
+        <br>
+        <label for="cpassword">Confirm Password</label>
+        <input type="password" name="cpassword" id="cpassword" placeholder="Confirmed your password" required>
+        <br>
+        <button type="submit">Signup</button>
+
+    
+    </form>
+
+</body>
+</html>
