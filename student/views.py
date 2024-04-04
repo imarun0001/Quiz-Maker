@@ -452,6 +452,8 @@ def take_exam_view(request,pk):
 #     #response.set_cookie('course_id',course.id)
 #     response.set_cookie('testno',testno)
 #     return response
+
+#csrf_exempt hata dena sqlite mein
 # new code
 @csrf_exempt
 @timeout(120)  # Set a timeout of 2 minutes (120 seconds)
