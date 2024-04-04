@@ -1,8 +1,8 @@
 echo " BUILD START"
-python3.10 -m pip install -r requirements.txt
+pip install -r requirements.txt
 echo "Make Migration..."
-python3.10 manage.py makemigrations --noinput
-python3.10 manage.py migrate --noinput
-python3.10 manage.py collectstatic --noinput --clear
+manage.py makemigrations --noinput
+manage.py migrate --noinput
+manage.py collectstatic --noinput --clear
 echo " BUILD END"
 
