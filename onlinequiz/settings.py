@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR=os.path.join(BASE_DIR,'static')
 MEDIA_ROOT=os.path.join(BASE_DIR,'static')
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')   #added later for deployment by ap
+# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')   #added later for deployment by ap
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # emailable settings
@@ -103,6 +103,12 @@ WSGI_APPLICATION = 'onlinequiz.wsgi.application'
 #     'default': dj_database_url.config(default='DATABASE_URL')
 #     }
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
+load_dotenv()
+DATABASES = {
+    'default': dj_database_url.config(default='DATABASE_URL')
+    }
+
 
 # SuperBase Server
 # DATABASES = {
@@ -110,17 +116,17 @@ WSGI_APPLICATION = 'onlinequiz.wsgi.application'
 # }
 
 #postgresql-by arunanshu
-load_dotenv()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DATABASE'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('POSTGRES_HOST'),
-        'PORT': os.getenv('POSTGRES_DB_PORT'),
-    }
-}
+# load_dotenv()
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('POSTGRES_DATABASE'),
+#         'USER': os.getenv('POSTGRES_USER'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+#         'HOST': os.getenv('POSTGRES_HOST'),
+#         'PORT': os.getenv('POSTGRES_DB_PORT'),
+#     }
+# }
 
 # Local Server
 # DATABASES = {
