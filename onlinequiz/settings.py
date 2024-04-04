@@ -42,8 +42,8 @@ SECRET_KEY = 'CHROMASTONE'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','localhsot','127.0.0.1','.new.sh']
-
+# ALLOWED_HOSTS = ['.vercel.app','localhsot','127.0.0.1','.new.sh']
+ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1','.new.sh']
 # Application definition
 
 INSTALLED_APPS = [
