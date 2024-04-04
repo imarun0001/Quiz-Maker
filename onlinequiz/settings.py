@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR=os.path.join(BASE_DIR,'static')
 MEDIA_ROOT=os.path.join(BASE_DIR,'static')
-# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')   #added later for deployment by ap
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')   #added later for deployment by ap
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # emailable settings
@@ -176,8 +176,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
-STATIC_DIR,
- ]
+# STATICFILES_DIRS=[
+# STATIC_DIR,
+#  ]
 
 LOGIN_REDIRECT_URL='/afterlogin'
