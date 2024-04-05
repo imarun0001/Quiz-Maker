@@ -3,8 +3,8 @@ from django.contrib import admin
 from quiz import views
 from django.contrib.auth.views import LogoutView,LoginView
 
-from django.conf.urls.static import static   #for deployment vercel
-from django.conf import settings  # for deployment vercel
+# from django.conf.urls.static import static   #for deployment vercel
+# from django.conf import settings  # for deployment vercel
 urlpatterns = [
    
     path('admin/', admin.site.urls),
@@ -55,4 +55,4 @@ urlpatterns = [
     
 
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)   #added for deployment
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)   #added for deployment
