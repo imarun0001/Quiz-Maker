@@ -26,8 +26,6 @@
             "src": "/(.*)",
             "dest": "onlinequiz/wsgi.py"
         }
-    ],
-    "env": {
-        "GUNICORN_CMD_ARGS": "--timeout 120"  
-    }
+    ]
+   
 }
