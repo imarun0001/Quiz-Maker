@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # build_files.sh
 echo " BUILD START"
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 echo "Make Migration..."
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput
