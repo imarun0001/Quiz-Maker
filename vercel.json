@@ -6,7 +6,7 @@
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
-                "runtime": "python3"
+                "runtime": "python3.9"
             }
         },
         {
@@ -26,6 +26,8 @@
             "src": "/(.*)",
             "dest": "onlinequiz/wsgi.py"
         }
-    ]
-   
+    ],
+    "env": {
+        "GUNICORN_CMD_ARGS": "--timeout 120"  
+    }
 }
