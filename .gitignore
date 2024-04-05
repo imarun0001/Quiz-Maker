@@ -6,10 +6,7 @@ __pycache__
 db.sqlite3
 # Ignore .env file
 #i comment for adding .env file in github
-.env     
+#.env     
 
-#in deployment process ignoring venv
-.venv
-venv/
 
 
