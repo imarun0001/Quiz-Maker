@@ -40,7 +40,8 @@ EMAIL_PORT=EMAIL_PORT
 SECRET_KEY = 'CHROMASTONE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG= False
 
 # ALLOWED_HOSTS = ['.vercel.app','localhsot','127.0.0.1','.new.sh']
 ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1','.new.sh']
