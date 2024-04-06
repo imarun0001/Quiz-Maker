@@ -1,4 +1,7 @@
 echo " BUILD START"
+cd venv-django
+.\Scripts\activate
+cd..
 python3.10 -m pip install -r requirements.txt
 echo "Make Migration..."
 python3.10 manage.py makemigrations --noinput
